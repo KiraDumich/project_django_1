@@ -1,3 +1,34 @@
 from django.db import models
 
-# Create your models here.
+NULLABLE = {'blank': True, 'null': True}
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, verbose_name='название категории')
+    description = models.TextField(verbose_name='описание категории')
+
+    def __str__(self):
+        # Строковое отображение объекта
+        return f'{self.pk} {self.name}'
+
+    class Meta:
+        verbose_name = 'категория'  # Настройка для наименования одного объекта
+        verbose_name_plural = 'категории'  # Настройка для наименования набора объектов
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100, verbose_name='наименование товара')
+    description = models.TextField(verbose_name='описание товара')
+    preview = models.ImageField(upload_to='product_images', **NULLABLE, verbose_name='превью')
+    category = models.IntegerField(verbose_name='категория')
+    cost = models.IntegerField(verbose_name='стоимость')
+    data_start = models.DateTimeField(verbose_name='дата создания')
+    data_change = models.DateTimeField(verbose_name='дата последнего изменения')
+
+    def __str__(self):
+        # Строковое отображение объекта
+        return f'{self.pk} {self.name} {self.cost} {self.category}'
+
+    class Meta:
+        verbose_name = 'продукт'  # Настройка для наименования одного объекта
+        verbose_name_plural = 'продукты'  # Настройка для наименования набора объектов
