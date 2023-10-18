@@ -1,0 +1,42 @@
+{% extends 'catalog/home.html' %}
+{% block content %}
+    <div class="container">
+        <div class="col-12 mb-5">
+            <a class='btn btn-outline-primary' href="{% url 'blog:create' %}">Добавить пост</a>
+        </div>
+        <div class="row text-center">
+            {% for object in object_list %}
+                <div class="col-6">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">{{ object.title }}</h4>
+                            </div>
+                            <img class="card-img-top"
+                                 src="/media/{{ object.preview }}"
+                                 alt="Card image cap">
+                            <p>
+                                {{ object.text | truncatechars:100 }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'blog:view' object.pk %}"
+                                       class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="{% url 'blog:edit' object.pk %}" type="button"
+                                       class="btn btn-sm btn-outline-secondary">Edit</a>
+                                    <a href="{% url 'blog:delete' object.pk %}" type="button"
+                                       class="btn btn-sm btn-outline-danger">Delete</a>
+                                </div>
+                                {% if object.is_published %}
+                                    <h1 class="btn btn-outline-primary">Опубликовано</h1>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

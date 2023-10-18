@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 
-def catalog(request):
+def home(request):
     return render(request, 'catalog/home.html')
 
 
