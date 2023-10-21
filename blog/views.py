@@ -55,7 +55,6 @@ class BlogUpdateView(UpdateView):
         return reverse('blog:view', args=[self.kwargs.get('pk')])
 
 
-
 class BlogDeleteView(DeleteView):
     model = Blog
 

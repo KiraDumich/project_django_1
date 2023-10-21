@@ -22,8 +22,8 @@ class Product(models.Model):
     preview = models.ImageField(upload_to='product_images', **NULLABLE, verbose_name='превью')
     category = models.IntegerField(verbose_name='категория')
     cost = models.IntegerField(verbose_name='стоимость')
-    data_start = models.DateTimeField(verbose_name='дата создания')
-    data_change = models.DateTimeField(verbose_name='дата последнего изменения')
+    data_start = models.DateTimeField(verbose_name='дата создания', **NULLABLE)
+    data_change = models.DateTimeField(verbose_name='дата последнего изменения', **NULLABLE)
 
     def __str__(self):
         # Строковое отображение объекта
