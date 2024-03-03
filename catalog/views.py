@@ -3,6 +3,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
 
+from catalog.forms import ProductForm
 from catalog.models import Product
 
 
@@ -25,7 +26,7 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ('name', 'description', 'cost', 'category', 'preview')
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):
@@ -39,7 +40,7 @@ class ProductCreateView(CreateView):
 
 class ProductUpdateView(UpdateView):
     model = Product
-    fields = ('name', 'description', 'cost', 'category', 'preview')
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):

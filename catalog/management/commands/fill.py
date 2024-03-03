@@ -22,12 +22,12 @@ class Command(BaseCommand):
         Category.objects.bulk_create(category_for_create)
 
         products_list = [
-            {'name': 'Булка', 'description': '...', 'category': '1', 'cost': '25', 'data_start': '2023-09-16T04:55:20.875Z', 'data_change': '2023-09-16T04:55:20.875Z'},
-            {'name': 'Сосиска в тесте', 'description': '...', 'category': '1', 'cost': '37', 'data_start': '2023-09-16T04:55:20.875Z', 'data_change': '2023-09-16T04:55:20.875Z'},
-            {'name': 'Шоколад', 'description': '...', 'category': '3', 'cost': '87', 'data_start': '2023-09-16T04:55:20.875Z', 'data_change': '2023-09-16T04:55:20.875Z'},
-            {'name': 'Конфеты Маска', 'description': '...', 'category': '3', 'cost': '38', 'data_start': '2023-09-16T04:55:20.875Z', 'data_change': '2023-09-16T04:55:20.875Z'},
-            {'name': 'Вода', 'description': '...', 'category': '2', 'cost': '23', 'data_start': '2023-09-16T04:55:20.875Z', 'data_change': '2023-09-16T04:55:20.875Z'},
-            {'name': 'Кока-кола', 'description': '...', 'category': '2', 'cost': '56', 'data_start': '2023-09-16T04:55:20.875Z', 'data_change': '2023-09-16T04:55:20.875Z'}
+            {'name': 'Булка', 'description': '...', 'category' : '1', 'cost': '25', 'created_at': '2023-09-16T04:55:20.875Z', 'updated_at': '2023-09-16T04:55:20.875Z'},
+            {'name': 'Сосиска в тесте', 'description': '...', 'cost': '37', 'created_at': '2023-09-16T04:55:20.875Z', 'updated_at': '2023-09-16T04:55:20.875Z'},
+            {'name': 'Шоколад', 'description': '...', 'cost': '87', 'created_at': '2023-09-16T04:55:20.875Z', 'updated_at': '2023-09-16T04:55:20.875Z'},
+            {'name': 'Конфеты Маска', 'description': '...', 'cost': '38', 'created_at': '2023-09-16T04:55:20.875Z', 'updated_at': '2023-09-16T04:55:20.875Z'},
+            {'name': 'Вода', 'description': '...', 'cost': '23', 'created_at': '2023-09-16T04:55:20.875Z', 'updated_at': '2023-09-16T04:55:20.875Z'},
+            {'name': 'Кока-кола', 'description': '...', 'cost': '56', 'created_at': '2023-09-16T04:55:20.875Z', 'updated_at': '2023-09-16T04:55:20.875Z'}
         ]
 
         product_for_create = []

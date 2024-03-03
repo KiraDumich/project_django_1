@@ -20,10 +20,10 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='наименование товара')
     description = models.TextField(verbose_name='описание товара')
     preview = models.ImageField(upload_to='product_images', **NULLABLE, verbose_name='превью')
-    category = models.IntegerField(verbose_name='категория')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
     cost = models.IntegerField(verbose_name='стоимость')
-    data_start = models.DateTimeField(verbose_name='дата создания', **NULLABLE)
-    data_change = models.DateTimeField(verbose_name='дата последнего изменения', **NULLABLE)
+    created_at = models.DateTimeField(verbose_name='дата создания', **NULLABLE)
+    updated_at = models.DateTimeField(verbose_name='дата последнего изменения', **NULLABLE)
 
     def __str__(self):
         # Строковое отображение объекта
