@@ -16,8 +16,9 @@
                             <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
                         </div>
                         <div class="card-body">
-                            <li> Category: {{ object.category }}</li>
-                            <li> Description: {{ object.description|truncatechars:100 }}</li>
+                            <li> Категория: {{ object.category }}</li>
+                            <li> Описание продукта: {{ object.description|truncatechars:100 }}</li>
+                            <li> Цена: {{ object.cost|truncatechars:100 }} руб.</li>
                         </div>
                         <div class="btn-group">
                                     <a href="{% url 'catalog:view' object.pk %}"

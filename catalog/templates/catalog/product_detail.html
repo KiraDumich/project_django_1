@@ -1,5 +1,6 @@
 {% extends 'catalog/home.html' %}
 {% block content %}
+{% load my_tags %}
     <div class="container">
         <div class="col-12 mb-5">
             <div class="btn-group">
@@ -13,7 +14,7 @@
             <div class="col-md-4">
                 <div class="card mb-2 box-shadow">
                     <img class="card-img-top"
-                         src="/media/{{ object.preview }}"
+                         src="{{ object.preview| mymedia }}"
                          alt="Card image cap">
                     <div class="card-body">
                         <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
