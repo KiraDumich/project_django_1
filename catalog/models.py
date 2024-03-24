@@ -22,8 +22,8 @@ class Product(models.Model):
     preview = models.ImageField(upload_to='product_images', **NULLABLE, verbose_name='превью')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
     cost = models.IntegerField(verbose_name='стоимость')
-    created_at = models.DateTimeField(verbose_name='дата создания', **NULLABLE)
-    updated_at = models.DateTimeField(verbose_name='дата последнего изменения', **NULLABLE)
+    created_at = models.DateTimeField(verbose_name='дата создания', **NULLABLE, auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name='дата последнего изменения', auto_now=True, **NULLABLE)
 
     def __str__(self):
         # Строковое отображение объекта
