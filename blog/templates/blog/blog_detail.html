@@ -1,5 +1,6 @@
 {%  extends 'catalog/home.html'%}
 {% block content %}
+{% load my_tags %}
     <div class="col-12">
         <div class="row">
 
@@ -12,13 +13,14 @@
                         </h3>
                         <div class="card-body">
                             <img class="card-img-top"
-                                 src="/media/{{ object.preview }}"
+                                 src="{{ object.preview| mymedia }}"
                                  alt="Card image cap">
                         </div>
                     </section>
                     <div class="card-body">
                         <p>
                             {{ object.text }}
+                            {{ object.start_date }}
                         </p>
 
                     </div>
