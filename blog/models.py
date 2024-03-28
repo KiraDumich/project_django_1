@@ -9,7 +9,7 @@ class Blog(models.Model):
     slug = models.CharField(max_length=100, **NULLABLE, verbose_name='slug')
     text = models.TextField(verbose_name='содержимое')
     preview = models.ImageField(upload_to='preview_image', **NULLABLE, verbose_name='превью')
-    start_date = models.DateTimeField(**NULLABLE, verbose_name='дата создания')
+    start_date = models.DateTimeField(**NULLABLE, verbose_name='дата создания', auto_now_add=True)
     views = models.IntegerField(verbose_name='количество просмотров', default=0)
     public = models.BooleanField(default=True)
 
