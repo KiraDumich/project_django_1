@@ -1,18 +1,17 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
 from pytils.translit import slugify
 
 from catalog.forms import ProductForm
 from catalog.models import Product
 
 
-def home(request):
-    return render(request, 'catalog/home.html')
+class CatalogView(TemplateView):
+    template_name = 'catalog/home.html'
 
 
-def contacts(request):
-    return render(request, 'catalog/contacts.html')
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'
 
 
 class ProductListView(ListView):
