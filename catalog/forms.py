@@ -24,4 +24,11 @@ class ProductForm(forms.ModelForm, StyleFormMixin):
 
         return cleaned_data
 
+    def clean_description(self):
+        cleaned_description = self.cleaned_data['description']
+        for i in ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']:
+
+            if i in cleaned_description:
+                raise forms.ValidationError('Описание товара содержит запрещенные слова')
+
 
