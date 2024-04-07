@@ -15,20 +15,22 @@ class ProductForm(forms.ModelForm, StyleFormMixin):
         model = Product
         fields = ('name', 'description', 'cost', 'category', 'preview')
 
-    def clean_title(self):
-        cleaned_data = self.cleaned_data['name']
-        for i in ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']:
+    def clean_name(self):
+        cleaned_data = self.cleaned_data.get('name')
+        words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
-            if i in cleaned_data:
-                raise forms.ValidationError('Название содержит запрещенные слова')
+        for word in words:
+            if word in cleaned_data:
+                raise forms.ValidationError('Ошибка в названии товара')
 
         return cleaned_data
 
     def clean_description(self):
-        cleaned_description = self.cleaned_data['description']
-        for i in ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']:
+        cleaned_data = self.cleaned_data.get('description')
+        words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
-            if i in cleaned_description:
-                raise forms.ValidationError('Описание товара содержит запрещенные слова')
+        for word in words:
+            if word in cleaned_data:
+                raise forms.ValidationError('Ошибка в описании')
 
-
+        return cleaned_data
