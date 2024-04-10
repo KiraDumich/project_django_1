@@ -3,7 +3,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from pytils.translit import slugify
 
 from catalog.forms import ProductForm
-from catalog.models import Product
+from catalog.models import Product, Version, Category
 
 
 class CatalogView(TemplateView):
@@ -16,6 +16,26 @@ class ContactsView(TemplateView):
 
 class ProductListView(ListView):
     model = Product
+    template_name = 'catalog/product_list.html'
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        products = self.get_queryset(*args, **kwargs)
+
+        for product in products:
+            versions = Version.objects.filter(product=product)
+            active_version = versions.filter(feature=True)
+            if active_version:
+                product.active_version = active_version.last().title
+            else:
+                product.active_version = 'Нет активной версии'
+
+        context_data['object_list'] = products
+        return context_data
 
 
 class ProductDetailView(DetailView):
@@ -55,4 +75,3 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
-

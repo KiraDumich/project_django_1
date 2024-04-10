@@ -17,7 +17,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=100, verbose_name='наименование товара')
+    name = models.CharField(max_length=100, verbose_name='наименование товара', unique=True)
     description = models.TextField(verbose_name='описание товара')
     preview = models.ImageField(upload_to='product_images', **NULLABLE, verbose_name='превью')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
@@ -32,3 +32,10 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'продукт'  # Настройка для наименования одного объекта
         verbose_name_plural = 'продукты'  # Настройка для наименования набора объектов
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='товар')
+    number = models.IntegerField(verbose_name='номер версии', default=1)
+    title = models.CharField(max_length=150, verbose_name='название версии')
+    feature = models.BooleanField(verbose_name='признак текущей версии', default=True)
