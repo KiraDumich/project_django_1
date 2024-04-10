@@ -32,3 +32,10 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'продукт'  # Настройка для наименования одного объекта
         verbose_name_plural = 'продукты'  # Настройка для наименования набора объектов
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='товар')
+    number = models.IntegerField(verbose_name='номер версии', default=1)
+    title = models.CharField(max_length=150, verbose_name='название версии')
+    feature = models.BooleanField(verbose_name='признак текущей версии', default=True)
