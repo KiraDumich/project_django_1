@@ -1,13 +1,12 @@
 from random import randint, random
 
 from django.conf import settings
-from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy, reverse  # reverse_lazy - для возвращения ссылки, на которую попадёт пользователь
 from django.views.generic import CreateView, UpdateView
 
-from users.forms import UserProfileForm, UserRegisterForm
+from users.forms import UserProfileForm, UserRegisterForm  # кастомные модели
 from users.models import User
 
 
@@ -18,7 +17,6 @@ class RegisterView(CreateView):
     template_name = 'users/register.html'
 
     def form_valid(self, form):
-
         verified_password = ''
         for i in range(8):
             i = randint(0, 9)
@@ -29,7 +27,8 @@ class RegisterView(CreateView):
         user.verified_password = verified_password
         send_mail(
             subject='Верификация почты',
-            message=f'Если вы регистрировались в Skystore: нажмите на ссылку: http://127.0.0.1:8000/users/verifying?code={user.verified_password}\n Так вы подтвердите почту',
+            message=f'Если вы регистрировались в Skystore: нажмите на ссылку: '
+                    f'http://127.0.0.1:8000/users/verifying?code={user.verified_password}\n Так вы подтвердите почту',
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[user.email]
         )
@@ -65,4 +64,3 @@ def generate_new_password(request):
     request.user.set_password(new_password)
     request.user.save()
     return redirect(reverse('catalog:merchandise'))
-
