@@ -1,10 +1,9 @@
-from django.urls import path
+from django.urls import path, reverse_lazy
 
 from blog.views import BlogListView
 from catalog.apps import CatalogConfig
 from catalog.views import (CatalogView, ContactsView, ProductDeleteView, ProductListView, ProductUpdateView,
                            ProductDetailView, ProductCreateView)
-
 
 app_name = CatalogConfig.name
 urlpatterns = [
@@ -15,5 +14,6 @@ urlpatterns = [
     path('create/', ProductCreateView.as_view(), name='create'),
     path('edit/<int:pk>/', ProductUpdateView.as_view(), name='edit'),
     path('delete/<int:pk>/', ProductDeleteView.as_view(), name='delete'),
+
 ]
 
