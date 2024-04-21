@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
 from pytils.translit import slugify
@@ -6,15 +8,15 @@ from catalog.forms import ProductForm
 from catalog.models import Product, Version, Category
 
 
-class CatalogView(TemplateView):
+class CatalogView(LoginRequiredMixin, TemplateView):
     template_name = 'catalog/home.html'
 
 
-class ContactsView(TemplateView):
+class ContactsView(LoginRequiredMixin, TemplateView):
     template_name = 'catalog/contacts.html'
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/product_list.html'
 
@@ -38,28 +40,31 @@ class ProductListView(ListView):
         return context_data
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
+    permission_required = 'main.add_product'
     success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):
         if form.is_valid():
             new_product = form.save()
             new_product.slug = slugify(new_product.name)
+            new_product.owner = self.request.user
             new_product.save()
 
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
+    permission_required = 'main.change_product'
     success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):
@@ -72,6 +77,7 @@ class ProductUpdateView(UpdateView):
         return reverse('catalog:view', args=[self.kwargs.get('pk')])
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = Product
+    permission_required = 'main.delete_product'
     success_url = reverse_lazy('catalog:home')
