@@ -1,6 +1,6 @@
 import secrets
 import string
-from random import randint, random
+from random import random, randint
 
 from config import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -29,7 +29,7 @@ class RegisterView(CreateView):
 
         user = form.save()
         user.is_active = False
-        verified_password = "".join([str(random.randint(1, 9)) for _ in range(10)])
+        verified_password = "".join([str(randint(1, 9)) for _ in range(10)])
         user.verified_password = verified_password
         user.save()
         current_site = self.request.get_host()

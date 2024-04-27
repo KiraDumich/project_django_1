@@ -7,7 +7,7 @@ from users.views import RegisterView, ProfileView, generate_new_password, verify
 app_name = UsersConfig.name
 
 urlpatterns = [
-    path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('', LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('confirm/<str:token>/', views.verify_view, name='verification'),

@@ -3,9 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
 from pytils.translit import slugify
-
+from catalog.services import get_cashed_categories
 from catalog.forms import ProductForm
 from catalog.models import Product, Version, Category
+from config import settings
 
 
 class CatalogView(LoginRequiredMixin, TemplateView):
@@ -44,6 +45,10 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        return context_data
+
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
@@ -81,3 +86,13 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = Product
     permission_required = 'main.delete_product'
     success_url = reverse_lazy('catalog:home')
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = 'catalog/category_list.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        context_data['object_list'] = get_cashed_categories
+        return context_data
