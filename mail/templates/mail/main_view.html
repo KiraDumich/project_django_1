@@ -1,0 +1,53 @@
+{%  extends 'catalog/home.html'%}
+{% block content %}
+{% load my_tags %}
+<div>
+    <a class="p-2 btn btn-outline-primary" href='{% url "mail:mailing_list" %}'>Настройки рассылки</a>
+    <a class="p-2 btn btn-outline-primary" href='{% url "mail:message_list" %}'>Сообщения рассылки</a>
+    <a class="p-2 btn btn-outline-primary" href='{% url "mail:client_list" %}'>Клиенты рассылки</a>
+</div>
+<p>
+</p>
+  <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header"><h5 class="card-title">Рассылки</h5></div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td>Количество рассылок всего</td>
+                            <td>{{ mailing_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Количество активных рассылок</td>
+                            <td>{{ active_mailing_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Количество уникальных клиентов для рассылок</td>
+                            <td>{{ unique_clients_count }}</td>
+                        </tr>
+
+                    </table>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header"><h5 class="card-title">Посты</h5></div>
+                <div class="card-body">
+                    {% for object in random_blogs %}
+                        {{ object.title }}
+                        {{ object.body }}
+                        <img class="img-fluid"
+                                 src="{{ object.preview| mymedia }}"
+                                 alt="Card image cap">
+                    {% endfor %}
+                </div>
+
+                <div class="card-footer"></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

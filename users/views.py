@@ -1,22 +1,31 @@
 import secrets
 import string
 from random import random, randint
-
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from config import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, LoginView
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse  # reverse_lazy - для возвращения ссылки, на которую попадёт пользователь
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 
 from users.forms import UserProfileForm, UserRegisterForm, ChangeUserPasswordForm  # кастомные модели
 from users.models import User
 
 
-class UserLoginView(LoginView):
+class UserLoginView(PermissionRequiredMixin, LoginView):
     redirect_authenticated_user = True
     success_url = reverse_lazy('catalog:home')
+
+
+class UserListView(ListView):
+    permission_required = 'users.view_all_users'
+    model = User
+
+    def get_queryset(self):
+        """Метод для вывода пользователей исключая себя"""
+        return super().get_queryset().exclude(pk=self.request.user.pk).exclude(is_superuser=True)
 
 
 class RegisterView(CreateView):

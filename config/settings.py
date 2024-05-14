@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'catalog',
     'blog',
     'users',
+    'mail',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +165,5 @@ if CASH_ENABLED:
     }
 # "BACKEND": — бэкенд для обработки кеша и работы с хранилищем.
 # "LOCATION": — месторасположение хранилища.
+
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
