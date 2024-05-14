@@ -22,9 +22,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mail.urls')),
+    path('', include('catalog.urls')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('users/', include('users.urls', namespace='users')),
-    path('catalog/', include('catalog.urls', namespace='catalog')),
+    path('mail/', include('mail.urls', namespace='mail')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
