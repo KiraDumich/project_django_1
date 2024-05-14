@@ -10,7 +10,7 @@ from catalog.views import (CatalogView, ContactsView, ProductDeleteView, Product
 app_name = CatalogConfig.name
 urlpatterns = [
     path('', CatalogView.as_view(), name='main'),
-    path('catalog', ProductListView.as_view(), name='home'),
+    path('catalog/', ProductListView.as_view(), name='home'),
     path('contacts/', ContactsView.as_view(), name='contacts'),
     path('<int:pk>/view/', cache_page(60)(ProductDetailView.as_view()), name='view'),
     path('create/', ProductCreateView.as_view(), name='create'),
