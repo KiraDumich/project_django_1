@@ -7,11 +7,11 @@
                     <div class="card-body">
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <p>Вы уверены, что хотите удалить пост?</p>
+                            <p>Вы уверены, что хотите удалить клиента?</p>
                             <button type="submit" class="btn btn-primary">
                                 Подтвердить
                             </button>
-                            <a href="{% url 'blog:mailing_list' %}" class="btn btn-warning">Отмена</a>
+                            <a href="{% url 'mail:client_list' %}" class="btn btn-warning">Отмена</a>
                         </form>
                     </div>
                 </div>
