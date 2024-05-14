@@ -39,7 +39,7 @@ class MailingListView(LoginRequiredMixin, ListView):
         return context_data
 
 
-class MailingDetailView(DetailView):
+class MailingDetailView(LoginRequiredMixin, DetailView):
     model = Mailing
     template_name = 'mail/mailing_detail.html'
 
@@ -48,7 +48,7 @@ class MailingDetailView(DetailView):
         return context_data
 
 
-class MailingCreateView(CreateView):
+class MailingCreateView(LoginRequiredMixin, CreateView):
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy('mail:mailing_list')
@@ -62,7 +62,7 @@ class MailingCreateView(CreateView):
         return super().form_valid(form)
 
 
-class MailingUpdateView(UpdateView):
+class MailingUpdateView(LoginRequiredMixin, UpdateView):
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy('mail:mailing_list')
@@ -76,7 +76,7 @@ class MailingUpdateView(UpdateView):
             raise Http404('У вас нет прав на редактирование рассылок')
 
 
-class MailingDeleteView(DeleteView):
+class MailingDeleteView(LoginRequiredMixin, DeleteView):
     model = Mailing
     permission_required = 'main.delete_mailing'
     success_url = reverse_lazy('mail:mailing_list')
@@ -92,12 +92,12 @@ class MailingDeleteView(DeleteView):
         return self.object
 
 
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     model = Client
     template_name = 'mail/client_list.html'
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('mail:client_list')
@@ -111,7 +111,7 @@ class ClientCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(LoginRequiredMixin, DeleteView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('mail:client_list')
@@ -127,7 +127,7 @@ class ClientDeleteView(DeleteView):
         return self.object
 
 
-class ClientDetailView(DetailView):
+class ClientDetailView(LoginRequiredMixin, DetailView):
     model = Client
     template_name = 'mail/client_detail.html'
 
@@ -136,7 +136,7 @@ class ClientDetailView(DetailView):
         return context_data
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('mail:mailing_client')
@@ -152,14 +152,13 @@ class ClientUpdateView(UpdateView):
         return self.object
 
 
-class MessageListView(ListView):
+class MessageListView(LoginRequiredMixin, ListView):
     model = Message
     template_name = 'mail/message_list.html'
 
 
-class MessageDetailView(DetailView):
+class MessageDetailView(LoginRequiredMixin, DetailView):
     model = Message
-    template_name = ''
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
