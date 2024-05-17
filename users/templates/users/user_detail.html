@@ -1,0 +1,32 @@
+{%  extends 'catalog/home.html'%}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        Информация о клиенте:</h4>
+                </div>
+                <div class="card-body">
+                      <table class="table">
+                                <td> Телефон {{ object.phone_number }}</td>
+                              <tr>
+                                <td> Страна: {{object.country}}</td>
+                              </tr>
+                             <tr>
+                                <td>Почта: {{object.email}}</td>
+                             </tr>
+                            <tr>
+                                <td>Аватар: {{ /users/object.avatar }}</td>
+                             </tr>
+
+                        </table>
+                </div>
+               <a class="p-2 btn btn-outline-primary" href='{% url "users:user_update" object.pk %}'>Редактировать
+               <a class="p-2 btn btn-outline-primary" href='{% url "users:user_delete" object.pk %}'>Удалить
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
