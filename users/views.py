@@ -36,9 +36,9 @@ class RegisterView(CreateView):
         return super().form_valid(form)
 
 
-def verify(token):
+def verify(request, token):
     user = get_object_or_404(User, token=token)
-    user.is_active = True
+    user.verified = True
     user.save()
     return redirect(reverse("users:login"))
 
