@@ -15,6 +15,7 @@ class User(AbstractUser):
     verified = models.BooleanField(default=False, verbose_name='верифицирован', blank=True)
     verified_password = models.CharField(verbose_name='ключ для верификации', **NULLABLE, max_length=20)
     is_blocked = models.BooleanField(default=False, verbose_name='блокировка пользователя')
+    token = models.CharField(max_length=50, verbose_name="токен")
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
