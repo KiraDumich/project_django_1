@@ -5,6 +5,7 @@ from django.db import models
 
 from config import settings
 from config.settings import AUTH_USER_MODEL
+from users.models import User
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -128,6 +129,7 @@ class Mail_Log(models.Model):
         Mailing, verbose_name="рассылка", on_delete=models.CASCADE, **NULLABLE)
     client = models.ForeignKey(
         Client, on_delete=models.CASCADE, verbose_name="клиент рассылки", **NULLABLE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='пользователь сервиса')
 
     def __str__(self):
         return f"Попытка отправки рассылки {self.attempt_time}, статус - {self.attempt_status}"

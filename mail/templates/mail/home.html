@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Skystore</title>
+    <title>Skymail</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 <body>
@@ -14,57 +14,9 @@
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
             <div class="col-12 col-md">
-                SkyStore
+                SkyMail
                 <div>
-    <a class="p-2 btn btn-outline-primary" href='{% url "mail:mailing_list" %}'>Настройки рассылки</a>
-    <a class="p-2 btn btn-outline-primary" href='{% url "mail:message_list" %}'>Сообщения рассылки</a>
-    <a class="p-2 btn btn-outline-primary" href='{% url "mail:client_list" %}'>Клиенты рассылки</a>
-</div>
-<p>
-</p>
-  <div class="row">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header"><h5 class="card-title">Рассылки</h5></div>
-                <div class="card-body">
-                    <table class="table">
-                        <tr>
-                            <td>Количество рассылок всего</td>
-                            <td>{{ mailing_count }}</td>
-                        </tr>
-                        <tr>
-                            <td>Количество активных рассылок</td>
-                            <td>{{ active_mailing_count }}</td>
-                        </tr>
-                        <tr>
-                            <td>Количество уникальных клиентов для рассылок</td>
-                            <td>{{ unique_clients_count }}</td>
-                        </tr>
-
-                    </table>
-                    <div class="card-footer"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header"><h5 class="card-title">Посты</h5></div>
-                <div class="card-body">
-                    {% for object in random_blogs %}
-                        {{ object.title }}
-                        {{ object.body }}
-                        <img class="img-fluid"
-                                 src="{{ object.preview| mymedia }}"
-                                 alt="Card image cap">
-                    {% endfor %}
-                </div>
-
-                <div class="card-footer"></div>
-
-            </div>
-        </div>
-    </div>
-                <small class="d-block mb-3 text-muted">&copy; 2023</small>
+                <small class="d-block mb-3 text-muted">&copy; 2024</small>
             </div>
             <div class="col-6 col-md">
                 <h5>Категории</h5>

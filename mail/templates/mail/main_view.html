@@ -1,10 +1,11 @@
-{%  extends 'home.html'%}
+{%  extends 'mail/home.html'%}
 {% block content %}
 {% load my_tags %}
 <div>
     <a class="p-2 btn btn-outline-primary" href='{% url "mail:mailing_list" %}'>Настройки рассылки</a>
     <a class="p-2 btn btn-outline-primary" href='{% url "mail:message_list" %}'>Сообщения рассылки</a>
     <a class="p-2 btn btn-outline-primary" href='{% url "mail:client_list" %}'>Клиенты рассылки</a>
+    <a class="p-2 btn btn-outline-primary" href='{% url "mail:logs_list" %}'>Попытки рассылки</a>
 </div>
 <p>
 </p>

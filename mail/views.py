@@ -179,12 +179,13 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class MailLogView(ListView):
-    model = Mailing
+class MailLogView(LoginRequiredMixin, ListView):
+    model = Mail_Log
+    template_name = 'mail/logs.html'
 
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        return queryset
+    def get_queryset(self):
+        """Метод для вывода логов только текущего пользователя"""
+        return super().get_queryset().filter(user=self.request.user)
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(**kwargs)
