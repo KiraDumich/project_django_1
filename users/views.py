@@ -99,7 +99,7 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
 class UserModerationView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = User
     form_class = UserModerationForm
-    template_name = 'users/block_user.html'
+    template_name = 'users/block_view.html'
     permission_required = ('users.block_users',)
 
     def get_success_url(self):

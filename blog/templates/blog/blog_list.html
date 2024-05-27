@@ -23,10 +23,14 @@
                                 <div class="btn-group">
                                     <a href="{% url 'blog:view' object.pk %}"
                                        class="btn btn-sm btn-outline-secondary">View</a>
+                                    {% if perms.blog.change_blog %}
                                     <a href="{% url 'blog:edit' object.pk %}" type="button"
                                        class="btn btn-sm btn-outline-secondary">Edit</a>
+                                    {% endif %}
+                                    {% if perms.blog.delete_blog or user.is_superuser %}
                                     <a href="{% url 'blog:delete' object.pk %}" type="button"
                                        class="btn btn-sm btn-outline-danger">Delete</a>
+                                    {% endif %}
                                 </div>
                                 {% if object.is_published %}
                                     <h1 class="btn btn-outline-primary">Опубликовано</h1>

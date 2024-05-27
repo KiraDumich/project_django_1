@@ -9,8 +9,12 @@
                     <h4 class="my-0 font-weight-normal">{{ object }}</h4>
                 </div>
                 <a class="p-2 btn btn-outline-primary" href='{% url "mail:client_detail" object.pk %}'>Подробнее
+                    {% if perms.mail.change_client %}
                     <a class="p-2 btn btn-outline-primary" href='{% url "mail:client_update" object.pk %}'>Редактировать
+                    {% endif %}
+                        {% if perms.mail.delete_client or user.is_superuser %}
                         <a class="p-2 btn btn-outline-primary" href='{% url "mail:client_delete" object.pk %}'>Удалить
+                        {% endif %}
             </div>
             {% endfor %}
             <a class ="p-2 btn btn-outline-primary" href='{% url "mail:client_create" %}'>Добавить клиента</a>

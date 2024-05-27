@@ -1,5 +1,7 @@
 from django.db import models
 
+from config import settings
+
 NULLABLE = {'blank': True, 'null': True}
 
 
@@ -12,6 +14,11 @@ class Blog(models.Model):
     start_date = models.DateTimeField(**NULLABLE, verbose_name='дата создания', auto_now_add=True)
     views = models.IntegerField(verbose_name='количество просмотров', default=0)
     public = models.BooleanField(default=True)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        verbose_name="автор",
+        **NULLABLE, )
 
     def __str__(self):
         # Строковое отображение объекта
