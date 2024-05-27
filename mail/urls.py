@@ -12,7 +12,7 @@ app_name = MailConfig.name
 
 
 urlpatterns = [
-    path('', cache_page(60)(MainView.as_view()), name='main_view'),
+    path('', MainView.as_view(), name='main_view'),
     path("mailingdetails/<int:pk>/", MailingDetailView.as_view(), name="mailing_detail"),
     path("mailingcreate/", MailingCreateView.as_view(), name="mailing_create"),
     path("mailingupdate/<int:pk>/", MailingUpdateView.as_view(), name="mailing_update"),
@@ -24,6 +24,6 @@ urlpatterns = [
     path("clientdetails/<int:pk>/", ClientDetailView.as_view(), name="client_detail"),
     path("clientupdate<int:pk>/", ClientUpdateView.as_view(), name="client_update"),
     path("clientdelete/<int:pk>/", ClientDeleteView.as_view(), name="client_delete"),
-    path("maillist", cache_page(60)(MailingListView.as_view()), name="mailing_list"),
+    path("maillist", MailingListView.as_view(), name="mailing_list"),
     path('mailing/logs_list/', MailLogView.as_view(), name='logs_list'),
 ]

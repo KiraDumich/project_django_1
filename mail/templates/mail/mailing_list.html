@@ -10,12 +10,16 @@
             <a href="{% url 'mail:mailing_detail' object.pk %}">
                 <button type="button" class="btn btn-sm btn-outline-primary">Подробнее</button>
             </a>
+            {% if perms.mail.change_mailing %}
             <a href="{% url 'mail:mailing_update' object.pk %}">
                 <button type="button" class="btn btn-sm btn-outline-primary">Редактировать</button>
             </a>
+            {% endif %}
+            {% if perms.mail.delete_mailing or user.is_superuser %}
             <a href="{% url 'mail:mailing_delete' object.pk %}">
                 <button type="button" class="btn btn-sm btn-outline-primary">Удалить</button>
             </a>
+            {% endif %}
         </div>
     </div>
 </div>

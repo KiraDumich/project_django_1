@@ -96,6 +96,10 @@ class ClientListView(LoginRequiredMixin, ListView):
     model = Client
     template_name = 'mail/client_list.html'
 
+    def get_queryset(self):
+        client_list = super().get_queryset().filter(owner=self.request.user)
+        return client_list
+
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client
@@ -155,6 +159,10 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
 class MessageListView(LoginRequiredMixin, ListView):
     model = Message
     template_name = 'mail/message_list.html'
+
+    def get_queryset(self):
+        client_list = super().get_queryset().filter(owner=self.request.user)
+        return client_list
 
 
 class MessageDetailView(LoginRequiredMixin, DetailView):
